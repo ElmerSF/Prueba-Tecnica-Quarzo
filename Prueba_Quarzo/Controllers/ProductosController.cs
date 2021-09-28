@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Prueba_Quarzo.Models;
 
 namespace Prueba_Quarzo.Controllers
 {
@@ -11,13 +12,53 @@ namespace Prueba_Quarzo.Controllers
         // GET: Productos
         public ActionResult Index()
         {
+            ViewBag.codigo = "";
+            ViewBag.nombre = "";
+            ViewBag.precio = "";
+            ViewBag.categoria = "";
             return View();
         }
 
         // GET: Productos/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Get_todo_Producto(Modelo_tabla_Categorias id)
         {
-            return View();
+            try
+            {
+                Operaciones_con_la_BD operaciones = new Operaciones_con_la_BD();
+                List<Modelo_tabla_Productos> list = new List<Modelo_tabla_Productos>();
+
+                list = operaciones.Tabla_Productos(id.Codigo_Categoria);
+
+                List<string> codigo = new List<string>();
+                List<string> nombre = new List<string>();
+                List<string> precio = new List<string>();
+                List<string> categoria = new List<string>();
+
+                if (list.Count > 0 || list != null)
+                {
+                    foreach (var item in list)
+                    {
+                        codigo.Add(item.Codigo_Producto + "");
+                        nombre.Add(item.Nombre + "");
+                        precio.Add(item.Precio + "");
+                        categoria.Add(item.Categoria + "");
+
+                    }
+
+                    ViewBag.codigo = codigo;
+                    ViewBag.nombre = nombre;
+                    ViewBag.precio = precio;
+                    ViewBag.categoria = categoria;
+                }
+
+                return View("Index");
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
+            
         }
 
         // GET: Productos/Create
