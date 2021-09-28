@@ -129,7 +129,7 @@
     <Compile Include="Models\Eliminar_registro.cs" />
     <Compile Include="Models\Modelo_tabla_Categorias.cs" />
     <Compile Include="Models\Modelo_tabla_Productos.cs" />
-    <Compile Include="Models\Operaciones_con_la_BD.cs" />
+    <Compile Include="Controllers\Operaciones_con_la_BD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

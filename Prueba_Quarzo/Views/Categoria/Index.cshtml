@@ -1,7 +1,92 @@
-﻿
+﻿@model Prueba_Quarzo.Models.Modelo_tabla_Categorias
 @{
     ViewBag.Title = "Categoria de Producto";
 }
 
 <h2>Categoria de Productos</h2>
+@using (Html.BeginForm("Get_Modificar", "Categoria", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Código de la Categoria:</th>
+                    <th>Nombre:</th>
+                    <th>Estatus Activo/Desactivo:</th>
+
+
+                </tr>
+                <tr>
+                    <td>
+                        @foreach (string codigo in ViewBag.codigo)
+                        {
+                            <ul class="table-bordered">
+                                @codigo
+                            </ul>
+                        }
+                    </td>
+                    <td>
+                        @foreach (string nombre in ViewBag.nombre)
+                        {
+                            <ul class="table-bordered">
+                                @nombre
+                            </ul>
+                        }
+                    </td>
+                    <td>
+                        @foreach (string activo in ViewBag.activo)
+                        {
+                            <ul class="table-bordered">
+                                @activo
+                            </ul>
+                        }
+                    </td>
+
+
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div>@Html.LabelFor(x => x.Codigo_Categoria)</div>
+            <div>@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
+            <div>@Html.LabelFor(x => x.Nombre)</div>
+            <div>@Html.TextBoxFor(x => x.Nombre)</div>
+            <div>@Html.LabelFor(x => x.Activo) True/False</div>
+            <div>@Html.TextBoxFor(x => x.Activo)</div>
+        </div>
+        <div class="form-group">
+            <input type="submit" typeof="Enviar" ; />
+
+        </div>
+        <div class="alert-info">
+
+        </div>
+        @ViewBag.mensaje
+
+
+    </div>
+}
+<h3>Eliminar un registro</h3>
+@using (Html.BeginForm("Delete", "Categoria", FormMethod.Post))
+{
+
+    <div class="row">
+        <div class="form-group">
+            <div>@Html.LabelFor(x => x.Codigo_Categoria) Codigo a Borrar</div>
+            <div>@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
+           
+        </div>
+        <div class="form-group">
+            <input type="submit" typeof="Enviar" value="Eliminar Registro" class="btn-danger" ; />
+
+        </div>
+        <div class="alert-info">
+
+        </div>
+        
+    </div>
+}
+
 

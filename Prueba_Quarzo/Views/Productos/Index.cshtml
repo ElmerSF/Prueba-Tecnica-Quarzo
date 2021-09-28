@@ -4,6 +4,7 @@
 }
 
 <h2>Productos por categoría</h2>
+
 @using (Html.BeginForm("Get_todo_Producto", "Productos", FormMethod.Get))
 {
     <div class="row">
@@ -14,7 +15,7 @@
                     <th>Nombre:</th>
                     <th>Precio:</th>
                     <th>Categoría a la que pertenece:</th>
-                 
+
                 </tr>
                 <tr>
                     <td>
@@ -49,7 +50,7 @@
                             </ul>
                         }
                     </td>
-                    
+
                 </tr>
             </table>
         </div>
@@ -69,4 +70,3 @@
 
     </div>
 }
-
