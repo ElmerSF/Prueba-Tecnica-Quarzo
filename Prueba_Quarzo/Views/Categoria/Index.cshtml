@@ -48,16 +48,17 @@
         </div>
     </div>
     <div class="row">
+        <p>Ingrese la Información de la Categoría que quiere modificar o Añadir</p>
         <div class="form-group">
-            <div>@Html.LabelFor(x => x.Codigo_Categoria)</div>
-            <div>@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
+            <div>@Html.LabelFor(x => x.Codigo_Categoria) </div>
+            <div title="Escriba el Codigo a Modificar o el nuevo código">@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
             <div>@Html.LabelFor(x => x.Nombre)</div>
-            <div>@Html.TextBoxFor(x => x.Nombre)</div>
+            <div title="Escriba el Nombre de la Categoría">@Html.TextBoxFor(x => x.Nombre)</div>
             <div>@Html.LabelFor(x => x.Activo) True/False</div>
-            <div>@Html.TextBoxFor(x => x.Activo)</div>
+            <div title="Si la Categoría esta activa escriba True de lo contrario se asignará como inactiva">@Html.TextBoxFor(x => x.Activo)</div>
         </div>
         <div class="form-group">
-            <input type="submit" typeof="Enviar" ; />
+            <input type="submit" typeof="Enviar" value="Enviar Datos" class="btn-success" title="Se enviará el formulario" ; />
 
         </div>
         <div class="alert-info">
@@ -73,13 +74,14 @@
 {
 
     <div class="row">
+        <p>Ingrese el Codigo de la Categoría que desea eliminar, al eliminarla se perderá toda la información</p>
         <div class="form-group">
             <div>@Html.LabelFor(x => x.Codigo_Categoria) Codigo a Borrar</div>
-            <div>@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
+            <div title="Escriba el Código de la Categoría a eliminar">@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
            
         </div>
         <div class="form-group">
-            <input type="submit" typeof="Enviar" value="Eliminar Registro" class="btn-danger" ; />
+            <input type="submit" typeof="Enviar" value="Eliminar Registro" class="btn-danger" title="El Registro se borrará" ; />
 
         </div>
         <div class="alert-info">

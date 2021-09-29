@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Esta clase controla los eventos de la página principal de inicio Home
+ * */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

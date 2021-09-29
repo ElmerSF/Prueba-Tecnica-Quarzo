@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*Esta clase es la que controla la página para modificar una Categoría, desde acá se realiza la invocación de las funciones
+ * que modifican, agregan o eliminan un registro
+ * 
+ **/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,43 +24,9 @@ namespace Prueba_Quarzo.Controllers
             return View();
         }
 
-        // GET: Categoria/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Categoria/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Categoria/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Categoria/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        
+        //Esta función invoca la función de modificar una Categoría o Agregar una nueva
         [HttpGet]
-        public ActionResult Get_Modificar( Modelo_tabla_Categorias categoria)
+        public ActionResult Get_Modificar(Modelo_tabla_Categorias categoria)
         {
             try
             {
@@ -66,12 +37,13 @@ namespace Prueba_Quarzo.Controllers
                 modelo.Activo = categoria.Activo;
                 List<Modelo_tabla_Categorias> list = new List<Modelo_tabla_Categorias>();
 
+                //Se envian los parámetros a la función Modificar_Categoría del archivo de Operaciones_con_la_BD
                 list = operacion.Modificar_Categoria(modelo);
 
                 List<string> codigo = new List<string>();
                 List<string> nombre = new List<string>();
                 List<string> activo = new List<string>();
-                
+
 
                 if (list.Count > 0 || list != null)
                 {
@@ -80,9 +52,11 @@ namespace Prueba_Quarzo.Controllers
                         codigo.Add(item.Codigo_Categoria + "");
                         nombre.Add(item.Nombre + "");
                         activo.Add(item.Activo + "");
-                        
+
 
                     }
+
+                    //los resultados se presentan en la pantalla
 
                     ViewBag.codigo = codigo;
                     ViewBag.nombre = nombre;
@@ -91,7 +65,7 @@ namespace Prueba_Quarzo.Controllers
 
                 }
 
-                // TODO: Add update logic here
+               
 
                 return View("Index");
             }
@@ -101,13 +75,8 @@ namespace Prueba_Quarzo.Controllers
             }
         }
 
-        // GET: Categoria/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //Esta Función permite la eliminación de una Categoría 
 
-        // POST: Categoria/Delete/5
         [HttpPost]
         public ActionResult Delete(Modelo_tabla_Categorias categoria)
         {
@@ -123,9 +92,12 @@ namespace Prueba_Quarzo.Controllers
                 modelo.Nombre = "Dato a borrar";
                 modelo.Activo = false;
 
-                string resultado ="";
+                string resultado = "";
 
+                //Se envian los parámetros a la función Eliminar_Categoría del archivo de Operaciones_con_la_BD
                 resultado = operacion.Eliminar_Categoria(modelo);
+
+                //se muestra el resultado de la operación en pantalla
                 ViewBag.mensaje = resultado;
 
 

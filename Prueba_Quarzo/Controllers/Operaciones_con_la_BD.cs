@@ -31,8 +31,8 @@ namespace Prueba_Quarzo.Models
                 SqlCommand orden = new SqlCommand();
                 conectar = new SqlConnection(Claveconexion); //le pasamos la ruta 
                 SqlDataReader leerDatos; // variable para lectura
-                                         //cadena coon el comnando para la base de datos
-                String comando_baseDatos = "exec Usp_Sel_Co_Produtos "+idCategoria+";";
+                                         //cadena coon el comnando para la base de datos en este caso es un procedimiento almacenado
+                String comando_baseDatos = "exec Usp_Sel_Co_Produtos " + idCategoria + ";";
 
                 //definir los parametros y ejecucion a la base datos
                 orden.CommandType = CommandType.Text;
@@ -75,16 +75,16 @@ namespace Prueba_Quarzo.Models
         #region modificar una categoría de producto o insertar una nueva
         public List<Modelo_tabla_Categorias> Modificar_Categoria(Modelo_tabla_Categorias nuevo_registro) //se modifica un Registro de Categoría o se inserta
         {
-            
+
             List<Modelo_tabla_Categorias> list = new List<Modelo_tabla_Categorias>();
             try
             {
                 //se envia el parametro a la base de datos
-                String parametro = "exec Usp_Ins_Co_Categoria @Codigo_Categoria, @Nombre, @Activo, 0;" ;
+                String parametro = "exec Usp_Ins_Co_Categoria @Codigo_Categoria, @Nombre, @Activo, 0;"; //se ejecuta procedimiento almacenado el cero final indica que no es un borrado
                 SqlConnection conectar;
                 SqlCommand orden = new SqlCommand();
                 conectar = new SqlConnection(Claveconexion);
-                
+
                 orden.CommandType = CommandType.Text;
                 orden.CommandText = parametro;
                 orden.Connection = conectar;
@@ -97,30 +97,30 @@ namespace Prueba_Quarzo.Models
                 SqlDataReader leerDatos; // variable para lectura
                 leerDatos = orden.ExecuteReader(); // datos que devuelve la consulta en base datos
 
-                    if (leerDatos.HasRows)
+                if (leerDatos.HasRows)
+                {
+                    while (leerDatos.Read()) //mientras haya lectura
                     {
-                        while (leerDatos.Read()) //mientras haya lectura
+                        list.Add(new Modelo_tabla_Categorias //llena la tablaCategoría con la lectura
                         {
-                            list.Add(new Modelo_tabla_Categorias //llena la tablaCategoría con la lectura
-                            {
-                                Codigo_Categoria = Convert.ToInt32(leerDatos.GetInt32(0)),
-                                Nombre = leerDatos.GetString(1),
-                                Activo = Convert.ToBoolean(leerDatos.GetBoolean(2)),
-                                
-                            }); ;
-                        }
-                    }
+                            Codigo_Categoria = Convert.ToInt32(leerDatos.GetInt32(0)),
+                            Nombre = leerDatos.GetString(1),
+                            Activo = Convert.ToBoolean(leerDatos.GetBoolean(2)),
 
-                    orden.Dispose();
-                    conectar.Close();
-                    
-                
+                        }); ;
+                    }
+                }
+
+                orden.Dispose();
+                conectar.Close();
+
+
 
             }
             catch
             {
 
-                
+
             }
 
             return list;
@@ -129,18 +129,18 @@ namespace Prueba_Quarzo.Models
         #endregion
 
         #region eliminar una categoría
-        public string Eliminar_Categoria(Modelo_tabla_Categorias nuevo_registro) //se modifica un Registro de Categoría o se inserta
+        public string Eliminar_Categoria(Modelo_tabla_Categorias nuevo_registro) //se elmina una Categoría
         {
             Boolean confirmacion;
             string cadena = "No se puedo eliminar registro";
             try
             {
                 //se envia el parametro a la base de datos
-                String parametro = "exec Usp_Ins_Co_Categoria @Codigo_Categoria, @Nombre, @Activo, 1;";
+                String parametro = "exec Usp_Ins_Co_Categoria @Codigo_Categoria, @Nombre, @Activo, 1;"; //se ejecuta procedimiento almacenado el 1 final indica que es eliminar
                 SqlConnection conectar;
                 SqlCommand orden = new SqlCommand();
                 conectar = new SqlConnection(Claveconexion);
-               // SqlDataReader leerDatos; // variable para lectura
+
 
                 orden.CommandType = CommandType.Text;
                 orden.CommandText = parametro;
@@ -161,7 +161,7 @@ namespace Prueba_Quarzo.Models
 
                     orden.Dispose();
                     conectar.Close();
-                   
+
                 }
 
             }

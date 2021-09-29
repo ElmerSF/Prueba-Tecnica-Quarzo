@@ -1,4 +1,6 @@
-﻿using System;
+﻿/*Esta clase es la que controla la página de mostrar todos los productos de una categoría
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,7 +21,7 @@ namespace Prueba_Quarzo.Controllers
             return View();
         }
 
-        // GET: Productos/Details/5
+        // Con esta función se invoca la operación para obtener todos los productos de un categoría
         public ActionResult Get_todo_Producto(Modelo_tabla_Categorias id)
         {
             try
@@ -27,6 +29,7 @@ namespace Prueba_Quarzo.Controllers
                 Operaciones_con_la_BD operaciones = new Operaciones_con_la_BD();
                 List<Modelo_tabla_Productos> list = new List<Modelo_tabla_Productos>();
 
+                //Se envian los parámetros a la función Tabla_Productos del archivo de Operaciones_con_la_BD
                 list = operaciones.Tabla_Productos(id.Codigo_Categoria);
 
                 List<string> codigo = new List<string>();
@@ -44,7 +47,7 @@ namespace Prueba_Quarzo.Controllers
                         categoria.Add(item.Categoria + "");
 
                     }
-
+                    //los resultados se presentan en la pantalla
                     ViewBag.codigo = codigo;
                     ViewBag.nombre = nombre;
                     ViewBag.precio = precio;
@@ -58,73 +61,9 @@ namespace Prueba_Quarzo.Controllers
 
                 return View();
             }
-            
+
         }
 
-        // GET: Productos/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Productos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Productos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Productos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Productos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Productos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

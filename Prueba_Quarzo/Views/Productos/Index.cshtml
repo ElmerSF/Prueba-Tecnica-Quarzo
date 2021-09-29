@@ -56,12 +56,13 @@
         </div>
     </div>
     <div class="row">
+        <p>Ingrese por el favor la Categoría del Producto y se mostrarán todos los productos de dicha categoría</p>
         <div class="form-group">
             <div>@Html.LabelFor(x => x.Codigo_Categoria)</div>
-            <div>@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
+            <div title="Escriba el Código de Categoría a consultar">@Html.TextBoxFor(x => x.Codigo_Categoria)</div>
         </div>
         <div class="form-group">
-            <input type="submit" typeof="Enviar" ; />
+            <input type="submit" typeof="Enviar" value="Consultar" class="btn-success" title="Se consultarán los Productos" />
 
         </div>
         <div class="alert-info">
